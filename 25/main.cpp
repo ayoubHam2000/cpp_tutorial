@@ -32,4 +32,21 @@
  * embedded system 
  	-> An embedded system is a combination of computer hardware and software designed for a specific function.
 
+ * const variable
+	-> const int a;
+ * const pointer
+	-> const int * const p; or int const * const p;
+	-> first const prevent changing the content of the pointer
+	-> second const prevent changing the pointer value
+ * const in a method
+	-> getter: int getX() const {}
+	-> the function getX can't change the class members value.
+
+ * mutable
+	-> it allows the variable to be change inside a method with const
+
+ * other
+	int *a, b;
+	-> a is a pointer, b is an integer
+	
 */
