@@ -11,9 +11,25 @@
 	* Member initializer lists
 		-> A constructor can optionally have a member initializer list, which initializes class members before the constructor body runs.
 		-> Prefer member initializer lists over assigning values in the body of the constructor. A member initializer list directly initializes the members.
+		-> ... will lead to each variable being written to twice, once for the default initialization and once for the assignment in the constructor body.
+		-> const members and reference members can only be initialized in an initialization list.
 	* Constructors may be declared as inline, explicit, friend, or constexpr.
+	* If any non-default constructors are declared, the compiler doesn't provide a default constructor
 	* A constructor can initialize an object that has been declared as const, volatile or const volatile.
 	* const members and members of reference type must be initialized in the member initializer list.
+
+	* Copy constructors
+		A copy constructor initializes an object by copying the member values from an object of the same type. If your class members are all simple types such as scalar values, the compiler-generated copy constructor is sufficient and you don't need to define your own. If your class requires more complex initialization, then you need to implement a custom copy constructor. For example, if a class member is a pointer then you need to define a copy constructor to allocate new memory and copy the values from the other's pointed-to object. The compiler-generated copy constructor simply copies the pointer, so that the new pointer still points to the other's memory location.
+		? Box(Box& other);
+			Avoid if possible--allows modification of other.
+		? Box(const Box& other);
+			Additional parameters OK if they have default values
+   		? Box(Box& other, int i = 42, string label = "Box");
+		When you define a copy constructor, you should also define a copy assignment operator (=). 
+		You can prevent your object from being copied by defining the copy constructor as deleted:
+		? Box (const Box& other) = delete;
+	* Move constructors (c++11)
+
 !------------------------------------------
 	* Destructor
 		-> A destructor is a member function that is invoked automatically when the object goes out of scope
